@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Forms</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="page" class="site">
+        <div class="container">
+            <div class="form-box">
+                <div class="progress">
+                    <div class="logo"><a href="/"><span>.web</span>design</a></div>
+                    <ul class="progress-step">
+                        <li class="step active">
+                            <span>1</span>
+                            <p>Personal<br><span>25 secs to complete</span></p>
+                        </li>
+                        <li class="step">
+                            <span>2</span>
+                            <p>Contact<br><span>25 secs to complete</span></p>
+                        </li>
+                        <li class="step">
+                            <span>3</span>
+                            <p>Security<br><span>25 secs to complete</span></p>
+                        </li>
+                    </ul>
+                </div>
+                <form name="resumeform" id="resumeform" >
+                    <div class="form-one form-step active">
+                        <h2>Informações Pessoais</h2>
+                        <p>Preencha os seus dados</p>
+                        <div>
+                            <label>Nome Completo</label>
+                            <input type="text" id="name" name="name" required placeholder="ex. John Smith">
+                        </div>
+                        <div>
+                            <label for="">Contato</label>
+                            <div class="grouping-contact">
+                                <input type="email" name="email" id="email" placeholder="email">
+                                <input type="tel" name="phone" id="phone" placeholder="+55xxxxxx">
+                            </div>
+                        </div>
+                        <div>
+                            <label>Data de Nascimento</label>
+                            <div class="grouping-contact">
+                                <input type="date" id="birth" name="birth">
+                                
+                            </div>
+                        </div>
+                        <div>
+                            <label for="">Endereço</label>
+                            <input type="text" name="street" id="street" placeholder="Logradouro">
+                        </div>
+                        <div>
+                            <div class="grouping-contact">
+                                <input type="text" name="number" id="number" placeholder="Número">
+                                <input type="text" name="district" id="district" placeholder="Bairro">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="grouping-contact">
+                                <input type="text" name="city" id="city" placeholder="Cidade">
+                                <input type="text" name="state" id="state" placeholder="UF">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="form-two form-step">
+                        
+                        <h2>Informações Profissionais</h2>
+                        <p>Preencha os seus dados</p>
+                        <div>
+                            <label for="">Objetivo</label>
+                            <textarea name="objective" id="objective " cols="30" rows="10" placeholder="Objetivo profissional. Informe detalhes da sua área de atuação e suas expectativas profissionais"></textarea>
+                            
+                        </div>
+                        <h2>Formação Acadêmica</h2>
+                        <div id="formacao-academica">
+                            <div class="bloco-formacao">
+                                <div class="curso">
+                                    <label for="">Curso</label>
+                                    <input type="text" name="academic" placeholder="Curso">
+                                </div>
+                                <div>
+                                    <label for="">Instituição e Nível de formação</label>
+                                    <div class="grouping-contact">
+                                        <input type="text" name="college" id="college" placeholder="Instituição">
+                                        <input type="text" name="degree" id="degree" placeholder="Nível de formação">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="">Data de Inicio e Término</label>
+                                    <div class="grouping-contact">
+                                        <input type="month" name="start" id="start">
+                                        <input type="month" name="end" id="end">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="adicionar-bloco">Adicionar Formação</button>
+
+                    </div>
+                    <div class="form-three form-step">
+                        <h2>Security</h2>
+                        <div>
+                            <label for="">Email</label>
+                            <input type="email" placeholder="Email">
+                        </div>
+                        <div>
+                            <label for="">Username</label>
+                            <input type="text" placeholder="Email">
+                        </div>
+                        <div>
+                            <label for="">Password</label>
+                            <input type="password" placeholder="Password">
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox">
+                            <label for="">Receive our news letter and special offers</label>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn-prev" disabled>Back</button>
+                        <button type="button" class="btn-next">Next Step</button>
+                        <button type="submit" class="btn-sub" hidden>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="resume-container"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
