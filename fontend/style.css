@@ -80,6 +80,7 @@ img {
     padding: 1em;
 }
 
+
 .logo {
     font-size: 1.75em;
     font-weight: 700;
@@ -158,10 +159,11 @@ form>div p {
 }
 
 .curso,
-form>div>div:not(.checkbox) {
+form>div>div:not(.checkbox-company) {
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
     margin-bottom: 2em;
+   
 }
 
 .bloco-formacao{
@@ -192,21 +194,47 @@ input:-webkit-autofill:active{
     box-shadow: inset 0 0 20px 20px #ffffff00;
 }
 
-textarea[name=objective] {
+textarea {
     resize: none;
     padding: 1em 1em;
+    
 }
 
 form label {
     font-size: var(--font-smaller);
     margin-bottom: 0.5em;
     font-weight: 600;
+    margin-top: 1em;
+}
+
+.input-container {
+    position: relative;
+   
+}
+
+.input-error-container {
+    position: relative;
+    margin-right: 10px; /* Espaçamento entre os campos de contato */
+    margin-bottom: 15px;
+    
+}
+
+.input-error-container input {
+    width: 100%;
+}
+
+.error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: red; /* Adicione qualquer estilo desejado para o texto de erro */
+    font-size: 12px; /* Adicione qualquer estilo desejado para o texto de erro */
+    
 }
 
 form .grouping-contact,
 form .grouping {
     display: flex;
-   
 }
 
 form .grouping-contact input{     
@@ -220,8 +248,15 @@ form .grouping input {
     flex-direction: column;
 }
 
-form .checkbox input {
+form .checkbox-company input {
     height: auto;
+}
+
+.checkbox-company{
+    margin-right: 1em;
+    margin-bottom: 15px; /* Espaço mínimo entre o checkbox e o próximo elemento */
+    float: right; /* Alinha o checkbox à direita */
+    clear: right; /* Limpa o float para evitar sobreposição */
 }
 
 form>div:not(.btn-group){

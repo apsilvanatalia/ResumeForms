@@ -1,38 +1,62 @@
 const form = document.getElementById('resumeform');
 const name = document.getElementById('name');
+const resume = document.getElementById('form-box');
 
 const nextButton = document.querySelector('.btn-next');
 const prevButton = document.querySelector('.btn-prev');
 const submitButton = document.querySelector('.btn-sub');
+const ckEmpresaAtual = document.getElementById('checkbox-company');
+
+const progress = document.querySelectorAll('.progress-step');
 const steps = document.querySelectorAll('.step');
 const form_steps = document.querySelectorAll('.form-step');
 let active = 1;
 
-document.addEventListener('DOMContentLoaded', function() {
-    const inputs = document.querySelectorAll('input, select');
 
-    inputs.forEach(input => {
-        input.addEventListener('blur', function() {
-            this.style.backgroundColor = 'transparent'; // Redefine a cor de fundo para transparente ao desfocar
-        });
+//Adicionar bloco experiencia dinamicamente
+document.getElementById('btn-add-experiencia').addEventListener('click', function () {
+    var experiencia = document.getElementById('esperiencia-profissional');
+    var novoBloco = document.querySelector('.bloco-experiencia').cloneNode(true);
+
+    // Limpar os campos de entrada dentro do novo bloco
+    novoBloco.querySelectorAll('input[type="text"]').forEach(function (input) {
+        input.value = '';
     });
+    novoBloco.querySelectorAll('input[type="month"]').forEach(function (input) {
+        input.value = '';
+    });
+
+    experiencia.appendChild(novoBloco);
+
+    // Adicionar botão de remover apenas nos blocos adicionados
+    if (experiencia.children.length > 1) {
+        var botaoRemover = document.createElement('button');
+        botaoRemover.type = 'button';
+        botaoRemover.className = 'remover-bloco';
+        botaoRemover.textContent = 'Remover';
+        novoBloco.appendChild(botaoRemover);
+
+        botaoRemover.addEventListener('click', function () {
+            novoBloco.remove();
+        });
+    }
 });
 
 //Adicionar bloco academico dinamicamente
-document.getElementById('adicionar-bloco').addEventListener('click', function() {
+document.getElementById('btn-add-academic').addEventListener('click', function () {
     var formacaoAcademica = document.getElementById('formacao-academica');
     var novoBloco = document.querySelector('.bloco-formacao').cloneNode(true);
 
     // Limpar os campos de entrada dentro do novo bloco
-    novoBloco.querySelectorAll('input[type="text"]').forEach(function(input) {
+    novoBloco.querySelectorAll('input[type="text"]').forEach(function (input) {
         input.value = '';
     });
-    novoBloco.querySelectorAll('input[type="month"]').forEach(function(input) {
+    novoBloco.querySelectorAll('input[type="month"]').forEach(function (input) {
         input.value = '';
     });
 
     formacaoAcademica.appendChild(novoBloco);
-    
+
     // Adicionar botão de remover apenas nos blocos adicionados
     if (formacaoAcademica.children.length > 1) {
         var botaoRemover = document.createElement('button');
@@ -41,139 +65,67 @@ document.getElementById('adicionar-bloco').addEventListener('click', function() 
         botaoRemover.textContent = 'Remover';
         novoBloco.appendChild(botaoRemover);
 
-        botaoRemover.addEventListener('click', function() {
+        botaoRemover.addEventListener('click', function () {
             novoBloco.remove();
         });
     }
 });
 
-/*
-form.addEventListener('submit', function(event) {
-    // Impedir o envio padrão do formulário para evitar recarregamento da página
-    event.preventDefault();
+document.getElementById('btn-add-aperfeicoamento').addEventListener('click', function () {
+    var aperfeicoamento = document.getElementById('aperfeicoamento');
+    var novoBloco = document.querySelector('.bloco-aperfeicoamento').cloneNode(true);
 
-    // Coletar os dados do formulário
-    const formData = new FormData(form);
+    // Limpar os campos de entrada dentro do novo bloco
+    novoBloco.querySelectorAll('input[type="text"]').forEach(function (input) {
+        input.value = '';
+    });
+    novoBloco.querySelectorAll('input[type="month"]').forEach(function (input) {
+        input.value = '';
+    });
 
-    // Criar um objeto para armazenar os dados do currículo
-    const resumeData = {};
+    aperfeicoamento.appendChild(novoBloco);
 
-    // Iterar sobre os dados do formulário e armazená-los no objeto do currículo
-    for (const [key, value] of formData.entries()) {
-        resumeData[key] = value;
+    // Adicionar botão de remover apenas nos blocos adicionados
+    if (aperfeicoamento.children.length > 1) {
+        var botaoRemover = document.createElement('button');
+        botaoRemover.type = 'button';
+        botaoRemover.className = 'remover-bloco';
+        botaoRemover.textContent = 'Remover';
+        novoBloco.appendChild(botaoRemover);
+
+        botaoRemover.addEventListener('click', function () {
+            novoBloco.remove();
+        });
     }
+});
 
-    // Exibir os dados do currículo em algum lugar na página
-    displayResume(resumeData);
+form.addEventListener('submit', function (event) {
+    if(validateForm(active)){
+        // Impedir o envio padrão do formulário para evitar recarregamento da página
+        event.preventDefault();
 
-    steps.forEach((step, i) => {
+        // Desabilitar os inputs e remover as bordas após o envio
+        disableInputs();
+        hiddenButtons();
         
+        
+
+        steps.forEach((step, i) => {
             step.classList.add('active');
             form_steps[i].classList.add('active');
             console.log('i =>' + i);
-        
-    });
+        });
 
+        downloadButton.hidden = false;
+
+    };
+    
 });
 
-// Função para exibir os dados do currículo
-function displayResume(resumeData) {
-    const resumeContainer = document.getElementById('resume-container');
-    resumeContainer.innerHTML = ''; // Limpar o conteúdo anterior
-
-    // Criar uma lista não ordenada para exibir os dados do currículo
-    const resumeList = document.createElement('ul');
-
-    // Iterar sobre os dados do currículo e criar elementos <li> para cada campo
-    for (const key in resumeData) {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${key}: ${resumeData[key]}`;
-        resumeList.appendChild(listItem);
-    }
-
-    // Adicionar a lista de currículo ao contêiner de currículo na página
-    resumeContainer.appendChild(resumeList);
-}*/
-
-form.addEventListener('submit', function(event) {
-    // Impedir o envio padrão do formulário para evitar recarregamento da página
-    event.preventDefault();
-
-    // Coletar os dados do formulário
-    const formData = new FormData(form);
-
-    // Criar um objeto para armazenar os dados do currículo
-    const resumeData = {};
-
-    // Iterar sobre os dados do formulário e armazená-los no objeto do currículo
-    for (const [key, value] of formData.entries()) {
-        if (resumeData[key]) {
-            // Se o campo já existir no objeto de dados, trata-se de um campo de formação acadêmica
-            if (!Array.isArray(resumeData[key])) {
-                // Se ainda não for um array, converta-o em um
-                resumeData[key] = [resumeData[key]];
-            }
-            // Adicione o novo valor ao array existente
-            resumeData[key].push(value);
-        } else {
-            // Se o campo ainda não existir no objeto de dados, simplesmente atribua o valor
-            resumeData[key] = value;
-        }
-    }
-
-    // Exibir os dados do currículo em algum lugar na página
-    displayResume(resumeData);
-
-    // Desabilitar os inputs e remover as bordas após o envio
-    disableInputs();
-    hiddenButtons();
-
-    steps.forEach((step, i) => {
-            step.classList.add('active');
-            form_steps[i].classList.add('active');
-            console.log('i =>' + i);
-    });
-
-});
-
-function displayResume(resumeData) {
-    const resumeContainer = document.getElementById('resume-container');
-    resumeContainer.innerHTML = ''; // Limpar o conteúdo anterior
-
-    // Criar uma lista não ordenada para exibir os dados do currículo
-    const resumeList = document.createElement('ul');
-
-    // Iterar sobre os dados do currículo e criar elementos <li> para cada campo
-    for (const key in resumeData) {
-        const listItem = document.createElement('li');
-
-        if (Array.isArray(resumeData[key])) {
-            // Se o valor for um array (caso dos campos de formação acadêmica), criar uma sub-lista
-            const sublist = document.createElement('ul');
-
-            resumeData[key].forEach(field => {
-                const subItem = document.createElement('li');
-                subItem.textContent = field;
-                sublist.appendChild(subItem);
-            });
-
-            const subListItem = document.createElement('li');
-            subListItem.textContent = key;
-            subListItem.appendChild(sublist);
-
-            listItem.appendChild(subListItem);
-        } else {
-            // Se não for um array, adicionar ao item principal da lista
-            listItem.textContent = `${key}: ${resumeData[key]}`;
-        }
-        //const secondAcademicInput = document.querySelectorAll('input[name="academic"]')[1];
-        //console.log(secondAcademicInput.value)
-
-        resumeList.appendChild(listItem);
-    }
-
-    // Adicionar a lista de currículo ao contêiner de currículo na página
-    resumeContainer.appendChild(resumeList);
+//Desabilitar o progresso de página
+function disableProgress() {
+    const progress = document.querySelectorAll('.progress-step');
+    progress.style.display = 'none';
 }
 
 //Desabilitar inputs para apresentar o curriculo como "documento"
@@ -184,7 +136,6 @@ function disableInputs() {
         input.style.border = 'none';
         input.style.background = 'none';
         input.style.backgroundColor = 'transparent';
-        
         input.style.setProperty('-webkit-box-shadow', 'inset 0 0 20px 20px #ffffff', 'important');
     });
 }
@@ -195,22 +146,60 @@ function hiddenButtons() {
     buttons.forEach(button => {
         button.style.display = 'none';
     });
+    //downloadButton.style.display = 'initial';
 }
 
+function validateForm(pageIndex) {
+    const requiredInputs = document.querySelectorAll(`.form-step:nth-child(${pageIndex}) [required]`);
+
+    let isValid = true;
+
+    requiredInputs.forEach(input => {
+        const errorSpan = input.nextElementSibling;
+
+        if (input.value.trim() === '' || (input.validity.patternMismatch && input.type !== 'checkbox')) {
+            input.classList.add('error');
+            
+            if (input.type === 'email') {
+                errorSpan.textContent = 'Please enter a valid email address.';
+            } else if (input.type === 'tel') {
+                errorSpan.textContent = 'Please enter a valid phone number.';
+            } else if (input.type === 'date') {
+                errorSpan.textContent = 'Please enter a valid date.';
+            } else {
+                errorSpan.textContent = 'This field is required.';
+            }
+            
+            isValid = false;
+        } else {
+            input.classList.remove('error');
+            errorSpan.textContent = '';
+        }
+    });
+
+    return isValid;
+}
+
+document.querySelectorAll('[required]').forEach(input => {
+    input.addEventListener('input', function() {
+        const errorSpan = input.nextElementSibling; 
+        errorSpan.textContent = '';
+    });
+});
 
 //Passar para próxima página
 nextButton.addEventListener('click', () => {
-    if(name.value == "" || name.value == null){
-        console.log("haha");
-    }else{
+    if(validateForm(active)){
         active++;
         if (active > steps.length) {
             active = steps.length;
         }
         updateProgress();
     }
+    
 });
 
+//Voltar para página anterior
 prevButton.addEventListener('click', () => {
     active--;
     if (active < 1) {
@@ -219,6 +208,8 @@ prevButton.addEventListener('click', () => {
     updateProgress();
 });
 
+
+//Atualizar o número de página e botões visiveis e habilitados da página
 const updateProgress = () => {
     console.log('steps.length =>' + steps.length);
     console.log('active =>' + active);
@@ -246,3 +237,12 @@ const updateProgress = () => {
         submitButton.hidden = true;
     }
 }
+
+/*
+downloadButton.addEventListener('click', function () {
+    
+});
+
+function generatePDF(data) {
+
+}*/
