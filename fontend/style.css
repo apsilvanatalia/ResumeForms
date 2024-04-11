@@ -305,6 +305,10 @@ form>div.active{
     color: black;
 }
 
+.remover-bloco{
+    margin-top: 2em;
+}
+
 /*
 .btn-group .btn-submit,
 .form-three.active ~ .btn-group .btn-next{

@@ -51,7 +51,7 @@
                                     <span class="error-message" id="email-error"></span>
                                 </div>
                                 <div class="input-error-container">
-                                    <input type="tel" name="phone" id="phone" required placeholder="+55xxxxxx">
+                                    <input type="tel" name="phone" id="phone" required placeholder="telefone: (00) 0 0000-0000">
                                     <span class="error-message" id="phone-error"></span>
                                 </div>
                             </div>
@@ -125,8 +125,8 @@
                                         </div>
                                     </div>
                                     <div class="checkbox-company" id="checkbox-company">
-                                        <label for="">Atual</label>
-                                        <input type="checkbox">
+                                        <label>Atual</label>
+                                        <input type="checkbox" id="ck-company">
                                     </div>
                                 </div>
                                 <div class="Curso">
@@ -187,21 +187,29 @@
                             <div class="bloco-aperfeicoamento">
                                 <div class="curso">
                                     <label>Curso</label>
-                                    <input type="text" name="non-degree-courses" placeholder="Curso" required>
-                                    <span class="error-message" id="non-degree-courses-error"></span>
+                                    <div class="input-container">
+                                        <input type="text" name="non-degree-courses" placeholder="Curso" required>
+                                        <span class="error-message" id="non-degree-courses-error"></span>
+                                    </div>
                                 </div>
                                 <div class="curso">
                                     <label for="">Instituição</label>
-                                    <input type="text" name="institution" id="institution" placeholder="Instituição" required>
-                                    <span class="error-message" id="institution-error"></span>
+                                    <div class="input-container">
+                                        <input type="text" name="institution" id="institution" placeholder="Instituição" required>
+                                        <span class="error-message" id="institution-error"></span>
+                                    </div>
                                 </div>
                                 <div>
                                     <label for="">Data de Inicio e Término</label>
                                     <div class="grouping-contact">
-                                        <input type="month" name="start-aperf" id="start" required>
-                                        <span class="error-message" id="start-aperf-error"></span>
-                                        <input type="month" name="end-aperf" id="end" required>
-                                        <span class="error-message" id="end-aperf-error"></span>
+                                        <div class="input-container">
+                                            <input type="month" name="start-aperf" id="start" required>
+                                            <span class="error-message" id="start-aperf-error"></span>
+                                        </div>
+                                        <div class="input-container">
+                                            <input type="month" name="end-aperf" id="end" required>
+                                            <span class="error-message" id="end-aperf-error"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +219,7 @@
                     <div class="btn-group">
                         <button type="button" class="btn-prev" disabled>Back</button>
                         <button type="button" class="btn-next">Next Step</button>
-                        <button type="submit" class="btn-sub" hidden>Submit</button>
+                        <button type="button" class="btn-sub" hidden>Submit</button>
                     </div>
                 </form>
             </div>
@@ -222,7 +230,19 @@
 
     
     <script src="script.js"></script>
-    
+    <script src="formsvalidation.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+
+    <script>
+        
+        $('#phone').mask('(00) 0 0000-0000');
+        $('#email').mask('A', {
+            translation: {
+                'A': { pattern: /[\w@\-.+]/, recursive: true }
+            }
+        });
+    </script>
 </body>
 
 </html>
