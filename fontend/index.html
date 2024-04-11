@@ -11,117 +11,202 @@
 <body>
     <div id="page" class="site">
         <div class="container">
-            <div class="form-box">
+            <div class="form-box" id="form-box">
                 <div class="progress">
-                    <div class="logo"><a href="/"><span>.web</span>design</a></div>
+                    <div class="logo"><a href="/"><span>#</span>Resume</a></div>
                     <ul class="progress-step">
                         <li class="step active">
                             <span>1</span>
-                            <p>Personal<br><span>25 secs to complete</span></p>
+                            <p>Pessoal<br><span>25 segs para preencher</span></p>
                         </li>
-                        <li class="step">
+                        <li class="step disable">
                             <span>2</span>
-                            <p>Contact<br><span>25 secs to complete</span></p>
+                            <p>Profissional<br><span>60 segs para preencher</span></p>
                         </li>
                         <li class="step">
                             <span>3</span>
-                            <p>Security<br><span>25 secs to complete</span></p>
+                            <p>Academico<br><span>60 segs para preencher</span></p>
+                        </li>
+                        <li class="step">
+                            <span>4</span>
+                            <p>Aperfeiçoamento<br><span>60 segs para preencher</span></p>
                         </li>
                     </ul>
+                    <button type="button" id="downloadPDF" hidden>Download PDF</button>
                 </div>
                 <form name="resumeform" id="resumeform" >
+                    
                     <div class="form-one form-step active">
                         <h2>Informações Pessoais</h2>
-                        <p>Preencha os seus dados</p>
-                        <div>
+                        <div class="input-container">
                             <label>Nome Completo</label>
                             <input type="text" id="name" name="name" required placeholder="ex. John Smith">
+                            <span class="error-message" id="name-error"></span>
                         </div>
-                        <div>
-                            <label for="">Contato</label>
+                        <div class="input-container">
+                            <label>Contato</label>
                             <div class="grouping-contact">
-                                <input type="email" name="email" id="email" placeholder="email">
-                                <input type="tel" name="phone" id="phone" placeholder="+55xxxxxx">
+                                <div class="input-error-container">
+                                    <input type="email" name="email" id="email" required placeholder="email">
+                                    <span class="error-message" id="email-error"></span>
+                                </div>
+                                <div class="input-error-container">
+                                    <input type="tel" name="phone" id="phone" required placeholder="+55xxxxxx">
+                                    <span class="error-message" id="phone-error"></span>
+                                </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="input-container">
                             <label>Data de Nascimento</label>
                             <div class="grouping-contact">
-                                <input type="date" id="birth" name="birth">
-                                
+                                <input type="date" id="birth" name="birth" required>
+                                <span class="error-message" id="birth-error"></span>
                             </div>
                         </div>
-                        <div>
-                            <label for="">Endereço</label>
-                            <input type="text" name="street" id="street" placeholder="Logradouro">
+                        <div class="input-container">
+                            <label>Endereço</label>
+                            <input type="text" name="street" id="street" placeholder="Logradouro" required>
+                            <span class="error-message" id="street-error"></span>
                         </div>
-                        <div>
+                        <div class="input-container">
                             <div class="grouping-contact">
-                                <input type="text" name="number" id="number" placeholder="Número">
-                                <input type="text" name="district" id="district" placeholder="Bairro">
+                                <div class="input-error-container">
+                                    <input type="text" name="number" id="number" placeholder="Número" required>
+                                    <span class="error-message" id="number-error"></span>
+                                </div>
+                                <div class="input-container">
+                                    <input type="text" name="district" id="district" placeholder="Bairro" required>
+                                    <span class="error-message" id="district"></span>
+                                </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="input-container">
                             <div class="grouping-contact">
-                                <input type="text" name="city" id="city" placeholder="Cidade">
-                                <input type="text" name="state" id="state" placeholder="UF">
+                                <div class="input-container">
+                                    <input type="text" name="city" id="city" placeholder="Cidade" required>
+                                    <span class="error-message" id="city-error"></span>
+                                </div>
+                                <div class="input-container">
+                                    <input type="text" name="state" id="state" placeholder="UF" required>
+                                    <span class="error-message" id="state-error"></span>
+                                </div>
                             </div>
                         </div>
                         
                     </div>
                     <div class="form-two form-step">
-                        
                         <h2>Informações Profissionais</h2>
-                        <p>Preencha os seus dados</p>
-                        <div>
-                            <label for="">Objetivo</label>
-                            <textarea name="objective" id="objective " cols="30" rows="10" placeholder="Objetivo profissional. Informe detalhes da sua área de atuação e suas expectativas profissionais"></textarea>
-                            
+                        <div class="input-container">
+                            <label>Objetivo</label>
+                            <textarea name="objective" id="objective" cols="30" rows="5" maxlength="250" placeholder="Objetivo profissional. Informe detalhes da sua área de atuação e suas expectativas profissionais" required></textarea>
+                            <span class="error-message" id="objective-error"></span>
                         </div>
+                        <h2>Experiência Profissional</h2>
+                        <div id="esperiencia-profissional">
+                            <div class="bloco-experiencia">
+                                
+                                <div class="Curso">
+                                    <label>Nome da empresa</label>
+                                    <div class="input-error-container">
+                                        <input type="text" name="company" placeholder="Nome empresa" required>
+                                        <span class="error-message" id="company-error"></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Data de Inicio e Término Contrato</label>
+                                    <div class="grouping-contact">
+                                        <div class="input-container">
+                                            <input type="month" name="start-contract" id="start-contract" required>
+                                            <span class="error-message" id="tart-contract-error"></span>
+                                        </div>
+                                        <div class="input-container">
+                                            <input type="month" name="end-contract" id="end-contract" required>
+                                            <span class="error-message" id="end-contract-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="checkbox-company" id="checkbox-company">
+                                        <label for="">Atual</label>
+                                        <input type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="Curso">
+                                    <label for="">Descrição das Atividade</label>
+                                    <div class="input-container">
+                                        <textarea name="activities" id="activities" cols="30" rows="10" maxlength="300" placeholder="Descrição das atividades. Informe de forma descritiva as atividades desempenhadas" required></textarea>
+                                        <span class="error-message" id="activities-error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="btn-add-experiencia">Adicionar Esperiência</button>
+                    </div>
+                    <div class="form-three form-step">
                         <h2>Formação Acadêmica</h2>
                         <div id="formacao-academica">
                             <div class="bloco-formacao">
                                 <div class="curso">
                                     <label for="">Curso</label>
-                                    <input type="text" name="academic" placeholder="Curso">
+                                    <div class="input-container">
+                                        <input type="text" name="academic" placeholder="Curso" required>
+                                        <span class="error-message" id="academic-error"></span>
+                                    </div>
                                 </div>
                                 <div>
                                     <label for="">Instituição e Nível de formação</label>
                                     <div class="grouping-contact">
-                                        <input type="text" name="college" id="college" placeholder="Instituição">
-                                        <input type="text" name="degree" id="degree" placeholder="Nível de formação">
+                                        <div class="input-container">
+                                            <input type="text" name="college" id="college" placeholder="Instituição" required>
+                                            <span class="error-message" id="college-error"></span>
+                                        </div>
+                                        <div class="input-container">
+                                            <input type="text" name="degree" id="degree" placeholder="Nível de formação" required>
+                                            <span class="error-message" id="degree-error"></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div>
                                     <label for="">Data de Inicio e Término</label>
                                     <div class="grouping-contact">
-                                        <input type="month" name="start" id="start">
-                                        <input type="month" name="end" id="end">
+                                        <div class="input-container">
+                                            <input type="month" name="star-academic" id="start" required>
+                                            <span class="error-message" id="star-academic-error"></span>
+                                        </div>
+                                        <div class="input-container">
+                                            <input type="month" name="end-academic" id="end" required>
+                                            <span class="error-message" id="end-academic-error"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" id="adicionar-bloco">Adicionar Formação</button>
-
+                        <button type="button" id="btn-add-academic">Adicionar Formação</button>
                     </div>
-                    <div class="form-three form-step">
-                        <h2>Security</h2>
-                        <div>
-                            <label for="">Email</label>
-                            <input type="email" placeholder="Email">
+                    <div class="form-four form-step">
+                        <h2>Aperfeiçoamento</h2>
+                        <div id="aperfeicoamento">
+                            <div class="bloco-aperfeicoamento">
+                                <div class="curso">
+                                    <label>Curso</label>
+                                    <input type="text" name="non-degree-courses" placeholder="Curso" required>
+                                    <span class="error-message" id="non-degree-courses-error"></span>
+                                </div>
+                                <div class="curso">
+                                    <label for="">Instituição</label>
+                                    <input type="text" name="institution" id="institution" placeholder="Instituição" required>
+                                    <span class="error-message" id="institution-error"></span>
+                                </div>
+                                <div>
+                                    <label for="">Data de Inicio e Término</label>
+                                    <div class="grouping-contact">
+                                        <input type="month" name="start-aperf" id="start" required>
+                                        <span class="error-message" id="start-aperf-error"></span>
+                                        <input type="month" name="end-aperf" id="end" required>
+                                        <span class="error-message" id="end-aperf-error"></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label for="">Username</label>
-                            <input type="text" placeholder="Email">
-                        </div>
-                        <div>
-                            <label for="">Password</label>
-                            <input type="password" placeholder="Password">
-                        </div>
-                        <div class="checkbox">
-                            <input type="checkbox">
-                            <label for="">Receive our news letter and special offers</label>
-                        </div>
+                        <button type="button" id="btn-add-aperfeicoamento">Adicionar Aperfeicoamento</button>
                     </div>
                     <div class="btn-group">
                         <button type="button" class="btn-prev" disabled>Back</button>
@@ -135,7 +220,9 @@
 
     <div id="resume-container"></div>
 
+    
     <script src="script.js"></script>
+    
 </body>
 
 </html>
