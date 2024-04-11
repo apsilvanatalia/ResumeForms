@@ -40,7 +40,7 @@
                         <h2>Informações Pessoais</h2>
                         <div class="input-container">
                             <label>Nome Completo</label>
-                            <input type="text" id="name" name="name" required placeholder="ex. John Smith">
+                            <input type="text" id="name" name="name" maxlength="50" placeholder="ex. John Smith">
                             <span class="error-message" id="name-error"></span>
                         </div>
                         <div class="input-container">
@@ -59,23 +59,24 @@
                         <div class="input-container">
                             <label>Data de Nascimento</label>
                             <div class="grouping-contact">
-                                <input type="date" id="birth" name="birth" required>
+                                <input type="date" id="birth" name="birth" max="<%= new Date().toISOString().split('T')[0] %>" required>
                                 <span class="error-message" id="birth-error"></span>
+                                <input type="text" id="age" name="age"hidden>
                             </div>
                         </div>
                         <div class="input-container">
                             <label>Endereço</label>
-                            <input type="text" name="street" id="street" placeholder="Logradouro" required>
+                            <input type="text" name="street" id="street" placeholder="Logradouro" maxlength="50" required>
                             <span class="error-message" id="street-error"></span>
                         </div>
                         <div class="input-container">
                             <div class="grouping-contact">
                                 <div class="input-error-container">
-                                    <input type="text" name="number" id="number" placeholder="Número" required>
+                                    <input type="text" name="number" id="number" placeholder="Número" maxlength="10" required>
                                     <span class="error-message" id="number-error"></span>
                                 </div>
                                 <div class="input-container">
-                                    <input type="text" name="district" id="district" placeholder="Bairro" required>
+                                    <input type="text" name="district" id="district" placeholder="Bairro" maxlength="23" required>
                                     <span class="error-message" id="district"></span>
                                 </div>
                             </div>
@@ -83,11 +84,11 @@
                         <div class="input-container">
                             <div class="grouping-contact">
                                 <div class="input-container">
-                                    <input type="text" name="city" id="city" placeholder="Cidade" required>
+                                    <input type="text" name="city" id="city" placeholder="Cidade" maxlength="23" required>
                                     <span class="error-message" id="city-error"></span>
                                 </div>
                                 <div class="input-container">
-                                    <input type="text" name="state" id="state" placeholder="UF" required>
+                                    <input type="text" name="state" id="state" placeholder="UF" minlength="2" maxlength="2" required>
                                     <span class="error-message" id="state-error"></span>
                                 </div>
                             </div>
@@ -228,20 +229,13 @@
 
     <div id="resume-container"></div>
 
-    
     <script src="script.js"></script>
     <script src="formsvalidation.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
 
     <script>
-        
-        $('#phone').mask('(00) 0 0000-0000');
-        $('#email').mask('A', {
-            translation: {
-                'A': { pattern: /[\w@\-.+]/, recursive: true }
-            }
-        });
+        applyMasks();
     </script>
 </body>
 
