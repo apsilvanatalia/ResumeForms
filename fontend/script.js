@@ -5,13 +5,27 @@ const resume = document.getElementById('form-box');
 const nextButton = document.querySelector('.btn-next');
 const prevButton = document.querySelector('.btn-prev');
 const submitButton = document.querySelector('.btn-sub');
-const ckEmpresaAtual = document.getElementById('checkbox-company');
+const ckEmpresaAtual = document.getElementById('ck-company');
 
 const progress = document.querySelectorAll('.progress-step');
 const steps = document.querySelectorAll('.step');
 const form_steps = document.querySelectorAll('.form-step');
 let active = 1;
+let atual = false;
 
+ckEmpresaAtual.addEventListener('change', function(){
+    dta_end = document.getElementById('end-contract');
+    if(this.checked){
+        dta_end.removeAttribute('required');
+        dta_end.disabled = true;
+        dta_end.value = '';
+        atual = true;
+    }else{
+        dta_end.setAttribute('required', 'required');
+        dta_end.disabled = false;
+        dta_end.value = ''
+    }
+})
 
 //Adicionar bloco experiencia dinamicamente
 document.getElementById('btn-add-experiencia').addEventListener('click', function () {
@@ -24,6 +38,9 @@ document.getElementById('btn-add-experiencia').addEventListener('click', functio
     });
     novoBloco.querySelectorAll('input[type="month"]').forEach(function (input) {
         input.value = '';
+    });
+    novoBloco.querySelectorAll('textarea').forEach(function (textarea) {
+        textarea.value = '';
     });
 
     experiencia.appendChild(novoBloco);
@@ -54,6 +71,9 @@ document.getElementById('btn-add-academic').addEventListener('click', function (
     novoBloco.querySelectorAll('input[type="month"]').forEach(function (input) {
         input.value = '';
     });
+    novoBloco.querySelectorAll('textarea').forEach(function (textarea) {
+        textarea.value = '';
+    });
 
     formacaoAcademica.appendChild(novoBloco);
 
@@ -71,6 +91,7 @@ document.getElementById('btn-add-academic').addEventListener('click', function (
     }
 });
 
+//Adicionar bloco aperfeicoamento dinamicamente
 document.getElementById('btn-add-aperfeicoamento').addEventListener('click', function () {
     var aperfeicoamento = document.getElementById('aperfeicoamento');
     var novoBloco = document.querySelector('.bloco-aperfeicoamento').cloneNode(true);
@@ -99,6 +120,7 @@ document.getElementById('btn-add-aperfeicoamento').addEventListener('click', fun
     }
 });
 
+/*
 form.addEventListener('submit', function (event) {
     if(validateForm(active)){
         // Impedir o envio padrão do formulário para evitar recarregamento da página
@@ -108,6 +130,32 @@ form.addEventListener('submit', function (event) {
         disableInputs();
         hiddenButtons();
         
+        
+
+        steps.forEach((step, i) => {
+            step.classList.add('active');
+            form_steps[i].classList.add('active');
+            console.log('i =>' + i);
+        });
+
+        downloadButton.hidden = false;
+
+    };
+    
+});*/
+
+submitButton.addEventListener('click', function () {
+    if(validateForm(active)){
+        // Impedir o envio padrão do formulário para evitar recarregamento da página
+        
+
+        // Desabilitar os inputs e remover as bordas após o envio
+        disableInputs();
+        hiddenButtons();
+        
+        if(!atual){
+            document.getElementById('checkbox-company').style.display = 'none';
+        }
         
 
         steps.forEach((step, i) => {
@@ -161,13 +209,14 @@ function validateForm(pageIndex) {
             input.classList.add('error');
             
             if (input.type === 'email') {
-                errorSpan.textContent = 'Please enter a valid email address.';
-            } else if (input.type === 'tel') {
-                errorSpan.textContent = 'Please enter a valid phone number.';
-            } else if (input.type === 'date') {
-                errorSpan.textContent = 'Please enter a valid date.';
+                errorSpan.textContent = "Por favor insira um email valido.";
+                
+            } if (input.type === 'tel') {
+                errorSpan.textContent = 'Por favor insira um telefone valido';
+            } if (input.type === 'date') {
+                errorSpan.textContent = 'Por favor insira uma data valida.';
             } else {
-                errorSpan.textContent = 'This field is required.';
+                errorSpan.textContent = 'O campo é obrigatório.';
             }
             
             isValid = false;
