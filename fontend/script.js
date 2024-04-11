@@ -1,5 +1,4 @@
 const form = document.getElementById('resumeform');
-const name = document.getElementById('name');
 const resume = document.getElementById('form-box');
 
 const nextButton = document.querySelector('.btn-next');
@@ -10,9 +9,18 @@ const ckEmpresaAtual = document.getElementById('ck-company');
 const progress = document.querySelectorAll('.progress-step');
 const steps = document.querySelectorAll('.step');
 const form_steps = document.querySelectorAll('.form-step');
+
 let active = 1;
 let atual = false;
+var today = new Date();
 
+// Formata a data atual no formato YYYY-MM-DD
+var formattedDate = today.toISOString().split('T')[0];
+
+// Define a data máxima para o campo de data "birth"
+document.getElementById('birth').setAttribute('max', formattedDate);
+
+//Verificação do status da ocupação de empresa
 ckEmpresaAtual.addEventListener('change', function(){
     dta_end = document.getElementById('end-contract');
     if(this.checked){
@@ -26,6 +34,30 @@ ckEmpresaAtual.addEventListener('change', function(){
         dta_end.value = ''
     }
 })
+
+//Calcular idade
+function calculateAge(birthDate) {
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const month = today.getMonth() - birthDate.getMonth();
+
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
+}
+
+//Habilitar campo de idade
+function displayAge(){
+    const age_input = document.getElementById('age');
+    const birthDate = new Date(document.getElementById('birth').value);
+
+    const age = calculateAge(birthDate);
+
+    age_input.style.display = 'initial'; 
+    age_input.disabled = true; 
+    age_input.value = age +" anos";
+}
 
 //Adicionar bloco experiencia dinamicamente
 document.getElementById('btn-add-experiencia').addEventListener('click', function () {
@@ -120,38 +152,12 @@ document.getElementById('btn-add-aperfeicoamento').addEventListener('click', fun
     }
 });
 
-/*
-form.addEventListener('submit', function (event) {
-    if(validateForm(active)){
-        // Impedir o envio padrão do formulário para evitar recarregamento da página
-        event.preventDefault();
-
-        // Desabilitar os inputs e remover as bordas após o envio
-        disableInputs();
-        hiddenButtons();
-        
-        
-
-        steps.forEach((step, i) => {
-            step.classList.add('active');
-            form_steps[i].classList.add('active');
-            console.log('i =>' + i);
-        });
-
-        downloadButton.hidden = false;
-
-    };
-    
-});*/
-
 submitButton.addEventListener('click', function () {
     if(validateForm(active)){
-        // Impedir o envio padrão do formulário para evitar recarregamento da página
-        
-
         // Desabilitar os inputs e remover as bordas após o envio
         disableInputs();
         hiddenButtons();
+        displayAge();
         
         if(!atual){
             document.getElementById('checkbox-company').style.display = 'none';
@@ -164,8 +170,7 @@ submitButton.addEventListener('click', function () {
             console.log('i =>' + i);
         });
 
-        downloadButton.hidden = false;
-
+        //downloadButton.hidden = false;
     };
     
 });
@@ -197,6 +202,7 @@ function hiddenButtons() {
     //downloadButton.style.display = 'initial';
 }
 
+//Validações dos inputs
 function validateForm(pageIndex) {
     const requiredInputs = document.querySelectorAll(`.form-step:nth-child(${pageIndex}) [required]`);
 
@@ -245,7 +251,6 @@ nextButton.addEventListener('click', () => {
         }
         updateProgress();
     }
-    
 });
 
 //Voltar para página anterior
@@ -256,7 +261,6 @@ prevButton.addEventListener('click', () => {
     }
     updateProgress();
 });
-
 
 //Atualizar o número de página e botões visiveis e habilitados da página
 const updateProgress = () => {
